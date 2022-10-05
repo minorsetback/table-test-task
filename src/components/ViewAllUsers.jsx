@@ -1,4 +1,4 @@
-import { useFetchUsers } from '../bus/books/hooks/useFetchUsers';
+import { useFetchUsers } from '../bus/users/hooks/useFetchUsers';
 import { Table } from 'antd';
 import { useEffect, useState } from 'react';
 import { Spin } from 'antd';
