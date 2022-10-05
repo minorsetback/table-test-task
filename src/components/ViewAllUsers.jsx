@@ -3,6 +3,8 @@ import { Table } from 'antd';
 import { useEffect, useState } from 'react';
 import { Spin } from 'antd';
 import { Link } from 'react-router-dom';
+import { PageHeader } from 'antd';
+
 const ViewAllUsers = () => {
     const { data, isFetching, error } = useFetchUsers()
     const [users, setUsers] = useState()
@@ -28,7 +30,6 @@ const ViewAllUsers = () => {
             title: 'Name',
             dataIndex: 'name',
             key: 'name',
-            render: (text, item) => <Link to={`/${item.key}`}>{text}</Link>,
             width: 150,
         },
         {
@@ -65,7 +66,15 @@ const ViewAllUsers = () => {
             dataIndex: 'phone',
             key: 'phone',
             width: 200,
-        }
+        },
+        {
+            title: 'Action',
+            key: 'operation',
+            fixed: 'right',
+            width: 100,
+            render: (item) => <Link to={`/${item.key}`}>View Details</Link>,
+        },
+
     ];
 
     if (isFetching) {
@@ -81,7 +90,13 @@ const ViewAllUsers = () => {
     }
 
     return (
-        <Table columns={columns} dataSource={users} pagination={false} />
+        <>
+            <PageHeader
+                className="site-page-header"
+                title="Users List"
+            />
+            <Table columns={columns} dataSource={users} pagination={false} scroll={{ x: 1800 }} />
+        </>
     );
 }
 
