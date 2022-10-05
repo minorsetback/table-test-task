@@ -4,12 +4,13 @@ import { Table } from 'antd';
 import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { PageHeader } from 'antd';
-
+import { useNavigate } from 'react-router-dom';
 const ViewUser = () => {
     const { id } = useParams();
     const [users, setUsers] = useState()
     const [user, setUser] = useState()
     const { data } = useSelector((state) => state.users);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (data) {
@@ -34,6 +35,7 @@ const ViewUser = () => {
             dataIndex: 'name',
             key: 'name',
             width: 150,
+            sorter: (a, b) => a.name.localeCompare(b.name)
         },
         {
             title: 'email',
@@ -46,6 +48,7 @@ const ViewUser = () => {
             dataIndex: 'city',
             key: 'city',
             width: 150,
+            sorter: (a, b) => a.city.localeCompare(b.city)
         },
         {
             title: 'suite',
@@ -129,6 +132,7 @@ const ViewUser = () => {
             <PageHeader
                 className="site-page-header"
                 title={`${user?.[0]?.name} profile page`}
+                onBack={() => navigate('/')}
             />
             <Table columns={columnsUser} dataSource={user} pagination={false} />
             <hr />

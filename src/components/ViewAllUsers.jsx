@@ -31,6 +31,7 @@ const ViewAllUsers = () => {
             dataIndex: 'name',
             key: 'name',
             width: 150,
+            sorter: (a, b) => a.name.localeCompare(b.name)
         },
         {
             title: 'email',
@@ -43,6 +44,7 @@ const ViewAllUsers = () => {
             dataIndex: 'city',
             key: 'city',
             width: 150,
+            sorter: (a, b) => a.city.localeCompare(b.city)
         },
         {
             title: 'suite',
