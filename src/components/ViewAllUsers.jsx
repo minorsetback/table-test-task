@@ -4,28 +4,7 @@ import { useEffect, useState } from 'react';
 import { Spin } from 'antd';
 import { Link } from 'react-router-dom';
 import { PageHeader } from 'antd';
-
-const ViewAllUsers = () => {
-    const { data, isFetching, error } = useFetchUsers()
-    const [users, setUsers] = useState()
-
-    useEffect(() => {
-        if (data) {
-            const results = data.map((item) => ({
-                key: String(item?.id),
-                name: item?.name,
-                email: item?.email,
-                city: item?.address.city,
-                suite: item?.address.suite,
-                street: item?.address.street,
-                zipcode: item?.address.zipcode,
-                phone: item?.phone
-            }))
-            setUsers(results)
-        }
-    }, [data])
-
-    const columns = [
+const columns = [
         {
             title: 'Name',
             dataIndex: 'name',
@@ -78,6 +57,14 @@ const ViewAllUsers = () => {
         },
 
     ];
+    
+const ViewAllUsers = () => {
+    const { data, isFetching, error } = useFetchUsers()
+    const [users, setUsers] = useState()
+
+    useEffect(() => {
+        setUsers(data)
+    }, [data])
 
     if (isFetching) {
         return (
